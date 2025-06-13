@@ -1,0 +1,13 @@
+@echo off
+echo Installing Node.js...
+powershell -Command "& {Invoke-WebRequest -Uri 'https://nodejs.org/dist/v20.11.1/node-v20.11.1-x64.msi' -OutFile '%TEMP%\node-installer.msi'}"
+msiexec /i "%TEMP%\node-installer.msi" /quiet /norestart
+
+echo Waiting for Node.js installation...
+timeout /t 30
+
+echo Setting up project...
+call npm install
+
+echo Starting development server...
+call npm run dev 
